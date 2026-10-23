@@ -14,7 +14,7 @@ CONFIG = ROOT / 'scripts' / 'approved_employers.json'
 OUTPUT = ROOT / 'jobs.json'
 NOW = datetime.datetime.now(datetime.timezone.utc)
 
-ROLE = re.compile(r'help[ -]?desk|service[ -]?desk|technical support|it support|desktop support|application support|support analyst|support engineer|noc|network operations|soc analyst|security operations|security analyst|cybersecurity|cloud support|cloud engineer|systems? admin|network admin|it specialist|incident (?:response|manager)|infrastructure support', re.I)
+ROLE = re.compile(r'help[ -]?desk|service[ -]?desk|technical support|it support|desktop support|application support|support analyst|support engineer|noc|network operations|soc analyst|security operations|security analyst|cybersecurity|cloud support|cloud engineer|systems? admin|network admin|it specialist|incident (?:response|manager|coordinator)|infrastructure support|site security officer|security operations coordinator|personnel security|security clearance coordinator|clearance coordinator|background (?:screening|investigator|investigation|check)|record searcher|trust (?:and|&) safety|fraud (?:analyst|investigator|specialist)|risk analyst|identity (?:and|&) access|access control analyst|compliance analyst|grc analyst|technical operations coordinator|osint analyst', re.I)
 EXCLUDE_ROLE = re.compile(r'\b(senior|sr\.?|principal|staff|director|vice president|head of|architect|sales|account executive|recruiter|physician|nurse)\b', re.I)
 REMOTE = re.compile(r'\bremote\b|work from home|work-from-home|telecommut', re.I)
 NOT_REMOTE = re.compile(r'\b(on[ -]?site only|in[ -]?office only|hybrid only|not remote|no remote)\b', re.I)
