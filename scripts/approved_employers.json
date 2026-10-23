@@ -1,4 +1,10 @@
 {
   "greenhouse": {},
-  "lever": {}
+  "lever": {
+    "SoundStack": "SoundStack",
+    "PacerPro": "PacerPro",
+    "CAI": "cagents",
+    "PointClickCare": "pointclickcare",
+    "Entrata": "entrata"
+  }
 }
