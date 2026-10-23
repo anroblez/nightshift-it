@@ -9,7 +9,7 @@ import urllib.request
 from urllib.parse import urlparse
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-CONFIG = ROOT / "scripts" / "approved_employers.json"
+CONFIG = ROOT / 'scripts' / 'approved_employers.json'
 OUTPUT = ROOT / 'jobs.json'
 NOW = datetime.datetime.now(datetime.timezone.utc)
 
@@ -30,6 +30,7 @@ SHIFT = {
 items = []
 seen = set()
 
+
 def get(url):
     req = urllib.request.Request(url, headers={
         'User-Agent': 'NightShiftIT/3.0 (personal job discovery)',
@@ -38,8 +39,10 @@ def get(url):
     with urllib.request.urlopen(req, timeout=35) as response:
         return json.load(response)
 
+
 def plain(value):
     return html.unescape(re.sub(r'<[^>]+>', ' ', str(value or '')))
+
 
 def add(company, title, url, location, description, posted, source, direct=False, employment=''):
     company, title, url, location = (str(v or '').strip() for v in (company, title, url, location))
@@ -61,13 +64,10 @@ def add(company, title, url, location, description, posted, source, direct=False
         return
     if NOT_REMOTE.search(location):
         return
-    # Location must indicate remote; descriptions can establish remote status when location is broad.
     if not (REMOTE.search(location) or REMOTE.search(description[:5000])):
         return
     if EXCLUDED_LOCATION.search(location):
         return
-    # A location such as 'London, UK' is not evidence of US remote eligibility.
-    # Allow remote + city/state labels for employer-direct listings, flagged for verification.
     if location and not US_LOCATION.search(location) and not direct and source != 'Arbeitnow':
         return
     if url in seen:
@@ -77,7 +77,6 @@ def add(company, title, url, location, description, posted, source, direct=False
     schedule = [name for name, pattern in SHIFT.items() if pattern.search(schedule_text)]
     clearance = 'Mentioned' if CLEARANCE.search(schedule_text) else 'Not mentioned'
     schedule_label = ', '.join(schedule) if schedule else 'Schedule unconfirmed'
-    source_label = ('Employer-direct · ' if direct else 'Trusted feed · ') + source
     notes = ('Employer career-board listing.' if direct else 'Third-party feed; confirm on employer career page.')
     notes += ' Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.'
     if clearance == 'Mentioned':
@@ -85,12 +84,107 @@ def add(company, title, url, location, description, posted, source, direct=False
     items.append({
         'id': source + ':' + url, 'company': company, 'title': title, 'url': url,
         'location': location or 'Remote (eligibility unconfirmed)',
-        'posted': str(posted or ''), 'source': source_label,
+        'posted': str(posted or ''),
+        'source': ('Employer-direct · ' if direct else 'Trusted feed · ') + source,
         'shift': schedule_label, 'hours': str(employment or ''),
         'evidence': schedule_label, 'clearance': clearance,
         'notes': notes, 'status': 'Saved',
     })
 
+
 def remotive():
     rows = get('https://remotive.com/api/remote-jobs').get('jobs', [])
-    print('Remotive listings received:', len(rows), flush=True)
+ print('Remotive listings received:', len(rows), flush=True)
+    before = len(items)
+    for j in rows:
+        add(j.get('company_name'), j.get('title'), j.get('url'),
+            j.get('candidate_required_location') or 'Remote (location unconfirmed)',
+            j.get('description'), j.get('publication_date'), 'Remotive',
+            employment=j.get('job_type'))
+    print('Remotive matches added:', len(items) - before, flush=True)
+
+
+def arbeitnow():
+    before = len(items)
+    for page in range(1, 4):
+        payload = get(f'https://www.arbeitnow.com/api/job-board-api?page={page}')
+        rows = payload.get('data', [])
+        print(f'Arbeitnow page {page} listings received:', len(rows), flush=True)
+        if not rows:
+            break
+        for j in rows:
+            if not j.get('remote'):
+                continue
+            add(j.get('company_name'), j.get('title'), j.get('url'),
+                j.get('location') or 'Remote (location unconfirmed)',
+                j.get('description'), j.get('created_at'), 'Arbeitnow',
+                employment=' '.join(j.get('job_types') or []))
+        if not payload.get('links', {}).get('next'):
+            break
+    print('Arbeitnow matches added:', len(items) - before, flush=True)
+
+
+def configured_boards():
+    if not CONFIG.exists():
+        print('No approved employer config found; skipping employer boards.', flush=True)
+        return
+    cfg = json.loads(CONFIG.read_text(encoding='utf-8'))
+    for source, api_template in (
+        ('Greenhouse', 'https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true'),
+        ('Lever', 'https://api.lever.co/v0/postings/{slug}?mode=json'),
+    ):
+        boards = cfg.get(source.lower(), {})
+        if isinstance(boards, dict):
+            entries = boards.items()
+        elif isinstance(boards, list):
+            entries = ((slug, slug) for slug in boards)
+        else:
+            print(f'Skipping invalid {source} config format.', flush=True)
+            continue
+        for slug, company in entries:
+            if not re.fullmatch(r'[A-Za-z0-9_-]+', str(slug)):
+                print(f'Skipping invalid {source} board slug: {slug!r}', flush=True)
+                continue
+            try:
+                data = get(api_template.format(slug=slug))
+                rows = data.get('jobs', []) if source == 'Greenhouse' else data
+                before = len(items)
+                for j in rows:
+                    if source == 'Greenhouse':
+                        add(company, j.get('title'), j.get('absolute_url'),
+                            (j.get('location') or {}).get('name', ''),
+                            j.get('content', ''), j.get('updated_at', ''), source, direct=True)
+                    else:
+                        categories = j.get('categories') or {}
+                        add(company, j.get('text'), j.get('hostedUrl'),
+                            categories.get('location', ''),
+                            j.get('descriptionPlain') or j.get('description') or '',
+                            j.get('createdAt', ''), source, direct=True,
+                            employment=categories.get('commitment', ''))
+                print(f'{source} {company}: {len(rows)} received, {len(items)-before} matches', flush=True)
+            except (urllib.error.URLError, ValueError, TypeError, KeyError) as e:
+                print(f'{source} {company}: failed ({e})', flush=True)
+
+
+def main():
+    for name, fn in (('Remotive', remotive), ('Arbeitnow', arbeitnow), ('Employer boards', configured_boards)):
+        try:
+            fn()
+        except (urllib.error.URLError, ValueError, TypeError, KeyError) as e:
+            print(f'{name} failed: {e}', flush=True)
+    items.sort(key=lambda j: str(j.get('posted', '')), reverse=True)
+    if not items:
+        print('No matching jobs collected; leaving existing jobs.json unchanged.', flush=True)
+        return
+    payload = {
+        'updated_at': NOW.isoformat(),
+        'jobs': items,
+        'disclaimer': 'Candidate matches only; remote eligibility and schedule are not independently confirmed.',
+    }
+    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    print('Total jobs written:', len(items), flush=True)
+
+
+if __name__ == '__main__':
+    main()
+    
