@@ -1,3 +1,35 @@
+"""NightShift IT: collect remote IT jobs from trusted feeds and configured employer boards."""
+import datetime
+import html
+import json
+import pathlib
+import re
+import urllib.error
+import urllib.request
+from urllib.parse import urlparse
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+CONFIG = ROOT / "scripts" / "approved_employers.json"
+OUTPUT = ROOT / 'jobs.json'
+NOW = datetime.datetime.now(datetime.timezone.utc)
+
+ROLE = re.compile(r'help[ -]?desk|service[ -]?desk|technical support|it support|desktop support|application support|support analyst|support engineer|noc|network operations|soc analyst|security operations|security analyst|cybersecurity|cloud support|cloud engineer|systems? admin|network admin|it specialist|incident (?:response|manager)|infrastructure support', re.I)
+EXCLUDE_ROLE = re.compile(r'\b(senior|sr\.?|principal|staff|director|vice president|head of|architect|sales|account executive|recruiter|physician|nurse)\b', re.I)
+REMOTE = re.compile(r'\bremote\b|work from home|work-from-home|telecommut', re.I)
+NOT_REMOTE = re.compile(r'\b(on[ -]?site only|in[ -]?office only|hybrid only|not remote|no remote)\b', re.I)
+EXCLUDED_LOCATION = re.compile(r'\b(europe only|emea only|uk only|canada only|india only|australia only|latam only|apac only)\b', re.I)
+US_LOCATION = re.compile(r'\b(united states|usa|u\.s\.|us only|north america|worldwide|global|anywhere|remote)\b', re.I)
+CLEARANCE = re.compile(r'security clearance|secret clearance|top secret|ts/sci|active clearance|clearance required|clearance preferred', re.I)
+SHIFT = {
+    'overnight': re.compile(r'overnight|night shift|graveyard|third shift|3rd shift', re.I),
+    'evening': re.compile(r'evening|late shift|second shift|2nd shift', re.I),
+    'weekend': re.compile(r'weekends?|24/7|24x7|24.hour|rotating shift', re.I),
+    'flexible': re.compile(r'flexible (?:hours|schedule)|asynchronous|set your own hours', re.I),
+    'parttime': re.compile(r'part[ -]?time|less than 30 hours', re.I),
+}
+items = []
+seen = set()
+
 def get(url):
     req = urllib.request.Request(url, headers={
         'User-Agent': 'NightShiftIT/3.0 (personal job discovery)',
@@ -62,67 +94,3 @@ def add(company, title, url, location, description, posted, source, direct=False
 def remotive():
     rows = get('https://remotive.com/api/remote-jobs').get('jobs', [])
     print('Remotive listings received:', len(rows), flush=True)
-    for x in rows:
-        add(x.get('company_name'), x.get('title'), x.get('url'),
-            x.get('candidate_required_location'), x.get('description'),
-            x.get('publication_date'), 'Remotive', employment=x.get('job_type'))
-
-def arbeitnow():
-    rows = get('https://www.arbeitnow.com/api/job-board-api').get('data', [])
-    print('Arbeitnow listings received:', len(rows), flush=True)
-    for x in rows:
-        if x.get('remote'):
-            add(x.get('company_name'), x.get('title'), x.get('url'),
-                'Remote', x.get('description'), x.get('created_at'), 'Arbeitnow')
-
-def greenhouse(company, token):
-    rows = get('https://boards-api.greenhouse.io/v1/boards/' + token + '/jobs?content=true').get('jobs', [])
-    print('Greenhouse', company, 'listings received:', len(rows), flush=True)
-    for x in rows:
-        if x.get('internal_job_id', 1) is None:
-            continue
-        add(company, x.get('title'), x.get('absolute_url'),
-            (x.get('location') or {}).get('name'), x.get('content'),
-            x.get('updated_at'), 'Greenhouse', direct=True)
-
-def lever(company, token):
-    rows = get('https://api.lever.co/v0/postings/' + token + '?mode=json&limit=100')
-    print('Lever', company, 'listings received:', len(rows), flush=True)
-    for x in rows:
-        description = ' '.join(str(v or '') for v in [
-            x.get('descriptionPlain'), x.get('additionalPlain'),
-            ' '.join(str(i.get('content', '')) for i in x.get('lists', [])),
-        ])
-        location = (x.get('categories') or {}).get('location', '')
-        add(company, x.get('text'), x.get('hostedUrl'), location,
-            description, x.get('createdAt'), 'Lever', direct=True,
-            employment=(x.get('categories') or {}).get('commitment', ''))
-
-def run(label, fn):
-    before = len(items)
-    try:
-        fn()
-        print(label, 'accepted:', len(items) - before, flush=True)
-    except Exception as exc:
-        print(label, 'ERROR:', type(exc).__name__, str(exc), flush=True)
-
-if __name__ == '__main__':
-    config = {'greenhouse': {}, 'lever': {}}
-    if CONFIG.exists():
-        config = json.loads(CONFIG.read_text(encoding='utf-8'))
-    run('Remotive', remotive)
-    run('Arbeitnow', arbeitnow)
-    for company, token in config.get('greenhouse', {}).items():
-        if re.fullmatch(r'[a-zA-Z0-9_-]+', str(token)):
-            run('Greenhouse ' + company, lambda c=company, t=token: greenhouse(c, t))
-    for company, token in config.get('lever', {}).items():
-        if re.fullmatch(r'[a-zA-Z0-9_-]+', str(token)):
-            run('Lever ' + company, lambda c=company, t=token: lever(c, t))
-    print('New matching jobs:', len(items), flush=True)
-    if items:
-        output = {
-            'updated_at': NOW.isoformat(),
-            'jobs': sorted(items, key=lambda x: str(x['posted']), reverse=True),
-            'disclaimer': 'Candidate matches only; schedules, clearance, and US eligibility are not independently confirmed.',
-        }
-        OUTPUT.write_text(json.dumps(output, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
