@@ -1,5 +1,18 @@
 {
-  "updated_at": "2026-10-23T21:24:41.684086+00:00",
-  "jobs": [],
-  "disclaimer": "Candidate matches only; shifts and state eligibility are not independently confirmed."
+  "updated_at": "2026-10-23T21:29:43.277396+00:00",
+  "jobs": [
+    {
+      "id": "Remotive:https://remotive.com/remote-jobs/information-technology/tier-iii-service-desk-engineer-2091045",
+      "company": "Unio Digital",
+      "title": "Tier III Service Desk Engineer",
+      "url": "https://remotive.com/remote-jobs/information-technology/tier-iii-service-desk-engineer-2091045",
+      "location": "Worldwide",
+      "posted": "2026-10-07T01:11:09",
+      "source": "Remotive",
+      "shift": "Schedule unverified",
+      "evidence": "Remote IT role; schedule not confirmed",
+      "notes": "Verify the actual schedule, US work eligibility, state restrictions, and whether the listing is still open."
+    }
+  ],
+  "disclaimer": "Candidate matches only; remote eligibility and schedule are not independently confirmed."
 }
