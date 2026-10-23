@@ -93,8 +93,8 @@ def add(company, title, url, location, description, posted, source, direct=False
 
 
 def remotive():
-        rows = get('https://remotive.com/api/remote-jobs').get('jobs', [])
-        print('Remotive listings received:', len(rows), flush=True)
+    rows = get('https://remotive.com/api/remote-jobs').get('jobs', [])
+    print('Remotive listings received:', len(rows), flush=True)
     before = len(items)
     for j in rows:
         add(j.get('company_name'), j.get('title'), j.get('url'),
@@ -187,4 +187,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
