@@ -1,5 +1,6 @@
 """NightShift IT: collect remote IT jobs from trusted feeds and configured employer boards."""
 import datetime
+from collections import Counter
 import html
 import json
 import pathlib
@@ -29,6 +30,7 @@ SHIFT = {
 }
 items = []
 seen = set()
+rejections = Counter()
 
 
 def get(url):
@@ -48,11 +50,14 @@ def add(company, title, url, location, description, posted, source, direct=False
     company, title, url, location = (str(v or '').strip() for v in (company, title, url, location))
     description = plain(description)
     if not company or not title or not url.startswith('https://'):
+        rejections['missing fields or invalid URL'] += 1
         return
     if not ROLE.search(title) or EXCLUDE_ROLE.search(title):
+        rejections['title not matched or excluded'] += 1
         return
     hostname = (urlparse(url).hostname or '').lower()
     if hostname in ('bit.ly', 'tinyurl.com', 't.me', 'wa.me', ''):
+        rejections['blocked shortlink'] += 1
         return
     allowed = {
         'Remotive': ('remotive.com',),
@@ -61,16 +66,22 @@ def add(company, title, url, location, description, posted, source, direct=False
         'Lever': ('lever.co',),
     }
     if not any(hostname == domain or hostname.endswith('.' + domain) for domain in allowed[source]):
+        rejections['unapproved link domain'] += 1
         return
     if NOT_REMOTE.search(location):
+        rejections['explicitly nonremote location'] += 1
         return
     if not (REMOTE.search(location) or REMOTE.search(description[:5000])):
+        rejections['no remote evidence'] += 1
         return
     if EXCLUDED_LOCATION.search(location):
+        rejections['restricted international location'] += 1
         return
     if location and not US_LOCATION.search(location) and not direct and source != 'Arbeitnow':
+        rejections['location not recognized as US eligible'] += 1
         return
     if url in seen:
+        rejections['duplicate URL'] += 1
         return
     seen.add(url)
     schedule_text = ' '.join((title, description[:12000], str(employment)))
@@ -114,6 +125,7 @@ def arbeitnow():
             break
         for j in rows:
             if not j.get('remote'):
+                rejections['Arbeitnow remote flag false'] += 1
                 continue
             add(j.get('company_name'), j.get('title'), j.get('url'),
                 j.get('location') or 'Remote (location unconfirmed)',
@@ -172,6 +184,7 @@ def main():
             fn()
         except (urllib.error.URLError, ValueError, TypeError, KeyError) as e:
             print(f'{name} failed: {e}', flush=True)
+    print('Rejection breakdown:', dict(rejections), flush=True)
     items.sort(key=lambda j: str(j.get('posted', '')), reverse=True)
     if not items:
         print('No matching jobs collected; leaving existing jobs.json unchanged.', flush=True)
