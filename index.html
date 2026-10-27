@@ -1,5 +1,108 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NightShift IT — Daily Job Radar</title><style>
 :root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#0a1020;color:#eaf1ff;color-scheme:dark}*{box-sizing:border-box}body{margin:0}header{background:radial-gradient(circle at 80% 0,#29446b 0,transparent 40%),linear-gradient(125deg,#132849,#101629);padding:42px max(20px,calc((100vw - 1120px)/2)) 36px;border-bottom:1px solid #30425c}h1{font-size:clamp(2rem,5vw,3.2rem);margin:0 0 8px;letter-spacing:-.045em}h2{font-size:1.22rem;margin:0 0 15px}p{line-height:1.55}.sub{color:#afc2de;margin:0}.eyebrow{font-size:.8rem;letter-spacing:.13em;color:#8fc5ff;font-weight:750;margin-bottom:10px}main{max-width:1160px;margin:auto;padding:24px 18px 60px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}.stat,.panel{background:#151f32;border:1px solid #2c405b;border-radius:17px;padding:19px}.stat strong{display:block;font-size:1.8rem}.muted,small{color:#a8bad4}.stat span{font-size:.86rem;color:#b1c2d9}.panel{margin-bottom:18px}.toolbar{display:flex;gap:10px;flex-wrap:wrap}.toolbar>*{flex:1;min-width:150px}input,select,textarea,button{font:inherit;background:#0e182a;color:#edf4ff;border:1px solid #405575;border-radius:10px;padding:11px}button{cursor:pointer;background:#3c70eb;border-color:#3c70eb;font-weight:700}button:hover{filter:brightness(1.13)}button.secondary{background:#253954;border-color:#3a5478}button.outline{background:transparent}button.saved{background:#7250aa;border-color:#7250aa}button.danger{background:#552d43;border-color:#552d43}.tabs{display:flex;gap:8px;margin-bottom:17px;flex-wrap:wrap}.tabs button{background:#1a2a43;border:1px solid #38506d}.tabs button.active{background:#376be3}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:13px}.job{background:#101b2e;border:1px solid #304764;border-radius:14px;padding:17px;display:flex;flex-direction:column;gap:10px}.job h3{margin:0;font-size:1.06rem}.company{color:#bad3f9;font-weight:650}.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{font-size:.73rem;padding:5px 8px;border-radius:999px;background:#243e5c;color:#d6eaff}.tag.warn{background:#55412d;color:#ffe0b1}.tag.ok{background:#20483e;color:#b8f4da}.job p{margin:0;font-size:.87rem;color:#b4c5de}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:auto}.actions button,.actions select{font-size:.83rem;padding:8px}.actions a{color:#a8c9ff;font-weight:700;font-size:.87rem}.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.note{font-size:.85rem;color:#b3c5df}.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}.formgrid>*{width:100%}a{color:#9ec5ff}.empty{border:1px dashed #425d7d;padding:24px;border-radius:12px;color:#b4c7e3}.mini{font-size:.8rem;color:#92b1d8}.toast{color:#c6f6d9}footer{text-align:center;color:#91a8c7;padding:20px}@media(max-width:600px){.stats{grid-template-columns:repeat(3,1fr)}.stat{padding:12px}.stat strong{font-size:1.3rem}}
+/* ===== MAGICAL NIGHTSHIFT THEME ===== */
+
+/* Aguafina for the main title */
+@import url('https://fonts.googleapis.com/css2?family=Aguafina+Script&display=swap');
+
+:root {
+  background: #061b27;
+  color: #e7f7f2;
+}
+
+/* Starry midnight background */
+body {
+  background-color: #061b27;
+  background-image:
+    radial-gradient(2px 2px at 10% 15%, #f7e4a5 50%, transparent 70%),
+    radial-gradient(2px 2px at 30% 35%, #d7f4ee 50%, transparent 70%),
+    radial-gradient(1px 1px at 50% 12%, #ffffff 50%, transparent 70%),
+    radial-gradient(2px 2px at 72% 28%, #f7e4a5 50%, transparent 70%),
+    radial-gradient(1px 1px at 90% 55%, #ffffff 50%, transparent 70%),
+    linear-gradient(160deg, #071925, #0a343b, #071b2c);
+  background-size: 380px 380px, 420px 420px, 290px 290px,
+    500px 500px, 350px 350px, auto;
+  background-attachment: fixed;
+
+  /* Tiny castle-inspired cursor */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext y='24' font-size='24'%3E🏰%3C/text%3E%3C/svg%3E") 2 2, auto;
+}
+
+/* Magical sky above the page */
+header {
+  background:
+    radial-gradient(circle at 78% 25%, rgba(65, 154, 149, .4), transparent 25%),
+    linear-gradient(135deg, #103d48, #091f32 70%, #061925);
+  border-bottom: 1px solid #35746f;
+}
+
+/* Big, elegant title */
+h1 {
+  font-family: "Aguafina Script", cursive;
+  font-size: clamp(3.8rem, 8vw, 6.5rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #fff1c4;
+  text-shadow: 0 0 20px rgba(255, 190, 95, .35);
+}
+
+/* Warm gold headings */
+h2,
+.eyebrow {
+  color: #f7d995;
+}
+
+/* Deep teal cards and panels */
+.stat,
+.panel {
+  background: rgba(9, 38, 48, .92);
+  border: 1px solid #2b6465;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .22);
+}
+
+.job {
+  background: #0a2935;
+  border: 1px solid #326c6c;
+}
+
+/* Flame-colored buttons */
+button {
+  background: linear-gradient(135deg, #df8b47, #b85d3e);
+  border-color: #e6a867;
+  color: #fff9e8;
+}
+
+button:hover {
+  box-shadow: 0 0 16px rgba(255, 158, 83, .5);
+}
+
+.tabs button.active {
+  background: #287d7b;
+  border-color: #69b4a6;
+}
+
+button.secondary {
+  background: #1c565d;
+  border-color: #397d7b;
+}
+
+/* Teal tags and warm links */
+.tag {
+  background: #20565a;
+  color: #dcf8ee;
+}
+
+a {
+  color: #f5d590;
+}
+
+/* Comfortable reading for inputs */
+input,
+select,
+textarea {
+  background: #071f2c;
+  border-color: #39716f;
+}
 </style></head><body><header><div class="eyebrow">PERSONAL JOB RADAR · REMOTE IT</div><h1>🌙 NightShift IT</h1><p class="sub">Find the night shift. Save the good ones. Build your IT career.</p></header><main>
 <div class="stats"><div class="stat"><strong id="newCount">—</strong><span>Daily matches</span></div><div class="stat"><strong id="savedCount">0</strong><span>Saved jobs</span></div><div class="stat"><strong id="appliedCount">0</strong><span>Applied</span></div></div>
 <section class="panel"><div class="row"><div><h2>Daily discovery feed</h2><div id="freshness" class="note">Checking for your latest job feed…</div></div><button id="refresh">↻ Check feed</button></div><p class="note">New jobs are collected daily after deployment. A keyword match is <strong>not</strong> proof of an overnight shift. Confirm shift, U.S. remote eligibility, and employer legitimacy before applying.</p></section>
