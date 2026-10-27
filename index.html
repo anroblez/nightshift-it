@@ -1,119 +1,862 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NightShift IT — Daily Job Radar</title><style>
-:root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:#0a1020;color:#eaf1ff;color-scheme:dark}*{box-sizing:border-box}body{margin:0}header{background:radial-gradient(circle at 80% 0,#29446b 0,transparent 40%),linear-gradient(125deg,#132849,#101629);padding:42px max(20px,calc((100vw - 1120px)/2)) 36px;border-bottom:1px solid #30425c}h1{font-size:clamp(2rem,5vw,3.2rem);margin:0 0 8px;letter-spacing:-.045em}h2{font-size:1.22rem;margin:0 0 15px}p{line-height:1.55}.sub{color:#afc2de;margin:0}.eyebrow{font-size:.8rem;letter-spacing:.13em;color:#8fc5ff;font-weight:750;margin-bottom:10px}main{max-width:1160px;margin:auto;padding:24px 18px 60px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px}.stat,.panel{background:#151f32;border:1px solid #2c405b;border-radius:17px;padding:19px}.stat strong{display:block;font-size:1.8rem}.muted,small{color:#a8bad4}.stat span{font-size:.86rem;color:#b1c2d9}.panel{margin-bottom:18px}.toolbar{display:flex;gap:10px;flex-wrap:wrap}.toolbar>*{flex:1;min-width:150px}input,select,textarea,button{font:inherit;background:#0e182a;color:#edf4ff;border:1px solid #405575;border-radius:10px;padding:11px}button{cursor:pointer;background:#3c70eb;border-color:#3c70eb;font-weight:700}button:hover{filter:brightness(1.13)}button.secondary{background:#253954;border-color:#3a5478}button.outline{background:transparent}button.saved{background:#7250aa;border-color:#7250aa}button.danger{background:#552d43;border-color:#552d43}.tabs{display:flex;gap:8px;margin-bottom:17px;flex-wrap:wrap}.tabs button{background:#1a2a43;border:1px solid #38506d}.tabs button.active{background:#376be3}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:13px}.job{background:#101b2e;border:1px solid #304764;border-radius:14px;padding:17px;display:flex;flex-direction:column;gap:10px}.job h3{margin:0;font-size:1.06rem}.company{color:#bad3f9;font-weight:650}.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{font-size:.73rem;padding:5px 8px;border-radius:999px;background:#243e5c;color:#d6eaff}.tag.warn{background:#55412d;color:#ffe0b1}.tag.ok{background:#20483e;color:#b8f4da}.job p{margin:0;font-size:.87rem;color:#b4c5de}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:auto}.actions button,.actions select{font-size:.83rem;padding:8px}.actions a{color:#a8c9ff;font-weight:700;font-size:.87rem}.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.note{font-size:.85rem;color:#b3c5df}.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}.formgrid>*{width:100%}a{color:#9ec5ff}.empty{border:1px dashed #425d7d;padding:24px;border-radius:12px;color:#b4c7e3}.mini{font-size:.8rem;color:#92b1d8}.toast{color:#c6f6d9}footer{text-align:center;color:#91a8c7;padding:20px}@media(max-width:600px){.stats{grid-template-columns:repeat(3,1fr)}.stat{padding:12px}.stat strong{font-size:1.3rem}}
-/* ===== MAGICAL NIGHTSHIFT THEME ===== */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NightShift IT — Daily Job Radar</title>
 
-/* Aguafina for the main title */
-@import url('https://fonts.googleapis.com/css2?family=Aguafina+Script&display=swap');
+  <style>
+    :root {
+      font-family: "MS UI Gothic", sans-serif;
+      background: #061b27;
+      color: #e7f7f2;
+      color-scheme: dark;
+    }
 
-:root {
-  background: #061b27;
-  color: #e7f7f2;
-}
+    * {
+      box-sizing: border-box;
+      font-family: "MS UI Gothic", sans-serif;
+    }
 
-/* Starry midnight background */
-body {
-  background-color: #061b27;
-  background-image:
-    radial-gradient(2px 2px at 10% 15%, #f7e4a5 50%, transparent 70%),
-    radial-gradient(2px 2px at 30% 35%, #d7f4ee 50%, transparent 70%),
-    radial-gradient(1px 1px at 50% 12%, #ffffff 50%, transparent 70%),
-    radial-gradient(2px 2px at 72% 28%, #f7e4a5 50%, transparent 70%),
-    radial-gradient(1px 1px at 90% 55%, #ffffff 50%, transparent 70%),
-    linear-gradient(160deg, #071925, #0a343b, #071b2c);
-  background-size: 380px 380px, 420px 420px, 290px 290px,
-    500px 500px, 350px 350px, auto;
-  background-attachment: fixed;
+    body {
+      margin: 0;
+      background-color: #061b27;
+      background-image:
+        radial-gradient(2px 2px at 10% 15%, #f7e4a5 50%, transparent 70%),
+        radial-gradient(2px 2px at 30% 35%, #d7f4ee 50%, transparent 70%),
+        radial-gradient(1px 1px at 50% 12%, #ffffff 50%, transparent 70%),
+        radial-gradient(2px 2px at 72% 28%, #f7e4a5 50%, transparent 70%),
+        radial-gradient(1px 1px at 90% 55%, #ffffff 50%, transparent 70%),
+        linear-gradient(160deg, #071925, #0a343b, #071b2c);
+      background-size:
+        380px 380px,
+        420px 420px,
+        290px 290px,
+        500px 500px,
+        350px 350px,
+        auto;
+      background-attachment: fixed;
 
-  /* Tiny castle-inspired cursor */
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext y='24' font-size='24'%3E🏰%3C/text%3E%3C/svg%3E") 2 2, auto;
-}
+      /* Castle cursor */
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext y='24' font-size='24'%3E🏰%3C/text%3E%3C/svg%3E") 2 2, auto;
+    }
 
-/* Magical sky above the page */
-header {
-  background:
-    radial-gradient(circle at 78% 25%, rgba(65, 154, 149, .4), transparent 25%),
-    linear-gradient(135deg, #103d48, #091f32 70%, #061925);
-  border-bottom: 1px solid #35746f;
-}
+    header {
+      background:
+        radial-gradient(
+          circle at 78% 25%,
+          rgba(65, 154, 149, .4),
+          transparent 25%
+        ),
+        linear-gradient(135deg, #103d48, #091f32 70%, #061925);
+      padding: 42px max(20px, calc((100vw - 1120px) / 2)) 36px;
+      border-bottom: 1px solid #35746f;
+    }
 
-/* Big, elegant title */
-h1 {
-  font-family: "Aguafina Script", cursive;
-  font-size: clamp(3.8rem, 8vw, 6.5rem);
-  font-weight: 400;
-  letter-spacing: 0;
-  color: #fff1c4;
-  text-shadow: 0 0 20px rgba(255, 190, 95, .35);
-}
+    h1 {
+      font-size: clamp(3.8rem, 8vw, 6.5rem);
+      margin: 0 0 8px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: #fff1c4;
+      text-shadow: 0 0 20px rgba(255, 190, 95, .35);
+    }
 
-/* Warm gold headings */
-h2,
-.eyebrow {
-  color: #f7d995;
-}
+    h2 {
+      font-size: 1.22rem;
+      margin: 0 0 15px;
+      color: #f7d995;
+    }
 
-/* Deep teal cards and panels */
-.stat,
-.panel {
-  background: rgba(9, 38, 48, .92);
-  border: 1px solid #2b6465;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, .22);
-}
+    p {
+      line-height: 1.55;
+    }
 
-.job {
-  background: #0a2935;
-  border: 1px solid #326c6c;
-}
+    .sub {
+      color: #afc2de;
+      margin: 0;
+    }
 
-/* Flame-colored buttons */
-button {
-  background: linear-gradient(135deg, #df8b47, #b85d3e);
-  border-color: #e6a867;
-  color: #fff9e8;
-}
+    .eyebrow {
+      font-size: .8rem;
+      letter-spacing: .13em;
+      color: #f7d995;
+      font-weight: 750;
+      margin-bottom: 10px;
+    }
 
-button:hover {
-  box-shadow: 0 0 16px rgba(255, 158, 83, .5);
-}
+    main {
+      max-width: 1160px;
+      margin: auto;
+      padding: 24px 18px 60px;
+    }
 
-.tabs button.active {
-  background: #287d7b;
-  border-color: #69b4a6;
-}
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 0 0 20px;
+    }
 
-button.secondary {
-  background: #1c565d;
-  border-color: #397d7b;
-}
+    .stat,
+    .panel {
+      background: rgba(9, 38, 48, .92);
+      border: 1px solid #2b6465;
+      border-radius: 17px;
+      padding: 19px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .22);
+    }
 
-/* Teal tags and warm links */
-.tag {
-  background: #20565a;
-  color: #dcf8ee;
-}
+    .stat strong {
+      display: block;
+      font-size: 1.8rem;
+    }
 
-a {
-  color: #f5d590;
-}
+    .stat span {
+      font-size: .86rem;
+      color: #b1c2d9;
+    }
 
-/* Comfortable reading for inputs */
-input,
-select,
-textarea {
-  background: #071f2c;
-  border-color: #39716f;
-}
-</style></head><body><header><div class="eyebrow">PERSONAL JOB RADAR · REMOTE IT</div><h1>🌙 NightShift IT</h1><p class="sub">Find the night shift. Save the good ones. Build your IT career.</p></header><main>
-<div class="stats"><div class="stat"><strong id="newCount">—</strong><span>Daily matches</span></div><div class="stat"><strong id="savedCount">0</strong><span>Saved jobs</span></div><div class="stat"><strong id="appliedCount">0</strong><span>Applied</span></div></div>
-<section class="panel"><div class="row"><div><h2>Daily discovery feed</h2><div id="freshness" class="note">Checking for your latest job feed…</div></div><button id="refresh">↻ Check feed</button></div><p class="note">New jobs are collected daily after deployment. A keyword match is <strong>not</strong> proof of an overnight shift. Confirm shift, U.S. remote eligibility, and employer legitimacy before applying.</p></section>
-<section class="panel"><div class="tabs"><button class="active" data-tab="discover">🔎 Discover</button><button data-tab="saved">♡ Saved jobs</button><button data-tab="applications">✓ Applications</button></div><div class="toolbar"><input id="search" placeholder="Search title, employer, keyword…" aria-label="Search jobs"><select id="filter"><option value="all">All shift types</option><option value="overnight">Overnight / night</option><option value="evening">Evening</option><option value="weekend">Weekend</option></select><select id="sort"><option value="new">Newest first</option><option value="company">Company A–Z</option></select><button class="secondary" id="export">Export saved CSV</button></div></section>
-<section class="panel"><div class="row"><h2 id="boardTitle">Discover jobs</h2><span id="resultCount" class="mini"></span></div><div class="grid" id="cards"></div></section>
-<section class="panel"><h2>Save a job you found elsewhere</h2><form id="add"><div class="formgrid"><input name="company" placeholder="Company name" required><input name="title" placeholder="Position title" required><input name="url" type="url" placeholder="Application URL" required><select name="shift"><option value="unverified">Shift unverified</option><option value="overnight">Overnight</option><option value="evening">Evening</option><option value="weekend">Weekend</option></select><input name="hours" placeholder="Hours / time zone"><input name="notes" placeholder="Notes (certs, clearance, clinical schedule)"></div><p><button type="submit">+ Save to my jobs</button></p></form></section>
-<section class="panel"><h2>Quick employer searches</h2><p class="note">Search for additional listings directly on career platforms; confirm the actual company careers page before applying.</p><div class="toolbar"><a target="_blank" rel="noopener" href="https://www.google.com/search?q=site%3Aicims.com+remote+%22overnight%22+%22service+desk%22">Federal service desk ↗</a><a target="_blank" rel="noopener" href="https://www.google.com/search?q=site%3Agreenhouse.io+%22remote%22+%22night+shift%22+%22support%22">Night technical support ↗</a><a target="_blank" rel="noopener" href="https://www.google.com/search?q=%22remote%22+%22overnight%22+%22NOC+analyst%22+careers">Overnight NOC ↗</a></div></section>
-<footer>Private bookmarks live in this browser only. Export your CSV to back them up.</footer></main><script>
-const STORE='nightshift-it-tracker-v2';const OLD='nightshift-it-jobs-v1';const seed={id:'manual:empower-ai',company:'Empower AI',title:'Tier I Service Desk Agent (Junior, Extended Hours)',url:'https://careers-empowerai.icims.com/jobs/9537/2026-9537/job',shift:'overnight',hours:'Extended hours window 8:01 PM–5:59 AM ET; assigned hours not confirmed',notes:'Official employer link. Active Secret clearance and IAT Level I certification required. Verify opening, shift and U.S. remote eligibility.',source:'Employer link',status:'Saved',posted:'',location:'Remote eligibility unverified',evidence:'Extended-hours shift listed in job description'};
-let saved={};try{saved=JSON.parse(localStorage.getItem(STORE)||'{}')}catch{};if(!Object.keys(saved).length){try{let old=JSON.parse(localStorage.getItem(OLD)||'[]');old.forEach(j=>saved['manual:'+j.id]={...j,id:'manual:'+j.id})}catch{};if(!Object.keys(saved).length)saved[seed.id]=seed;persist()}
-let feed=[],tab='discover',feedDate=null;const $=id=>document.getElementById(id);function persist(){localStorage.setItem(STORE,JSON.stringify(saved))}function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}function validUrl(url){try{let u=new URL(url);return ['https:','http:'].includes(u.protocol)?u.href:'#'}catch{return '#'}}function tags(j){let s=(j.shift||'unverified').toLowerCase();return `<span class="tag ${s==='unverified'?'warn':''}">${esc(j.shift||'Unverified shift')}</span><span class="tag warn">${esc(j.location||'Location unverified')}</span>`}function render(){let list=tab==='discover'?feed:Object.values(saved).filter(j=>tab==='saved'||j.status!=='Saved');let q=$('search').value.toLowerCase().trim(),f=$('filter').value;list=list.filter(j=>(!q||[j.title,j.company,j.notes,j.evidence,j.location].join(' ').toLowerCase().includes(q))&&(f==='all'||[j.shift,j.evidence,j.notes,j.hours].join(' ').toLowerCase().includes(f)));if($('sort').value==='company')list.sort((a,b)=>a.company.localeCompare(b.company));else list.sort((a,b)=>String(b.posted||'').localeCompare(String(a.posted||'')));$('newCount').textContent=feed.length;$('savedCount').textContent=Object.keys(saved).length;$('appliedCount').textContent=Object.values(saved).filter(j=>j.status!=='Saved').length;$('boardTitle').textContent=tab==='discover'?'Discover jobs':tab==='saved'?'Saved jobs':'Application tracker';$('resultCount').textContent=list.length+' results';$('cards').innerHTML=list.map(j=>{let isSaved=!!saved[j.id];let own=saved[j.id]||j;return `<article class="job"><div><h3>${esc(j.title)}</h3><div class="company">${esc(j.company)}</div></div><div class="tags">${tags(j)}</div><p>${esc(j.evidence?'Match clues: '+j.evidence:j.hours||'Exact shift hours unverified')}</p><p>${esc(j.notes||'Confirm schedule and remote eligibility with employer.')}</p><div class="mini">${esc(j.source||'Manually saved')}${j.posted?' · '+esc(j.posted.slice(0,10)):''}</div><div class="actions"><a target="_blank" rel="noopener noreferrer" href="${esc(validUrl(j.url))}">View listing ↗</a><button class="${isSaved?'saved':'secondary'}" data-action="save" data-id="${esc(j.id)}">${isSaved?'♥ Saved':'♡ Save'}</button>${isSaved?`<select aria-label="Application status" data-action="status" data-id="${esc(j.id)}">${['Saved','Applied','Interview','Offer','Rejected'].map(s=>`<option ${own.status===s?'selected':''}>${s}</option>`).join('')}</select><button class="danger" data-action="remove" data-id="${esc(j.id)}">Remove</button>`:''}</div></article>`}).join('')||`<div class="empty">${tab==='discover'?'No daily matches available yet. Publish the site and run the daily fetch workflow, or save jobs manually below.':'Nothing here yet. Save a listing from Discover or add your own.'}</div>`}
-$('cards').addEventListener('click',e=>{let b=e.target.closest('button[data-action]');if(!b)return;let id=b.dataset.id;if(b.dataset.action==='save'){if(!saved[id]){let j=feed.find(x=>x.id===id);if(j)saved[id]={...j,status:'Saved'}}else if(tab==='discover'){delete saved[id]}persist();render()}else if(b.dataset.action==='remove'){if(confirm('Remove this saved job?')){delete saved[id];persist();render()}}});$('cards').addEventListener('change',e=>{let s=e.target.closest('select[data-action="status"]');if(s&&saved[s.dataset.id]){saved[s.dataset.id].status=s.value;persist();render()}});document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));render()});['search','filter','sort'].forEach(id=>$(id).addEventListener('input',render));$('add').onsubmit=e=>{e.preventDefault();let d=Object.fromEntries(new FormData(e.target));let id='manual:'+Date.now();saved[id]={...d,id,status:'Saved',source:'Manually saved',location:'Remote eligibility unverified',evidence:'',posted:new Date().toISOString()};persist();e.target.reset();tab='saved';document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));render()};$('export').onclick=()=>{let cols=['company','title','url','shift','hours','location','notes','status','source','posted'];let rows=[cols.join(','),...Object.values(saved).map(j=>cols.map(k=>'"'+String(j[k]||'').replace(/"/g,'""')+'"').join(','))];let a=document.createElement('a'),u=URL.createObjectURL(new Blob([rows.join('\r\n')],{type:'text/csv'}));a.href=u;a.download='nightshift-it-saved-jobs.csv';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
-async function refresh(){let b=$('refresh');b.disabled=true;b.textContent='Checking…';try{let r=await fetch('./jobs.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('Feed unavailable');let d=await r.json();feed=Array.isArray(d.jobs)?d.jobs:[];feedDate=d.updated_at;$('freshness').textContent=feedDate?'Feed updated: '+new Date(feedDate).toLocaleString()+' · '+feed.length+' possible matches':'Daily feed not yet activated. See README for GitHub Pages setup.'}catch(e){$('freshness').textContent='Daily feed unavailable here. Host the website and enable the daily GitHub Action to load matches.'}finally{b.disabled=false;b.textContent='↻ Check feed';render()}}$('refresh').onclick=refresh;render();refresh();
-</script></body></html>
+    .muted,
+    small {
+      color: #a8bad4;
+    }
+
+    .panel {
+      margin-bottom: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar > * {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      font: inherit;
+      color: #edf4ff;
+      border: 1px solid #39716f;
+      border-radius: 10px;
+      padding: 11px;
+    }
+
+    input,
+    select,
+    textarea {
+      background: #071f2c;
+    }
+
+    button {
+      cursor: pointer;
+      background: linear-gradient(135deg, #df8b47, #b85d3e);
+      border-color: #e6a867;
+      color: #fff9e8;
+      font-weight: 700;
+    }
+
+    button:hover {
+      filter: brightness(1.13);
+      box-shadow: 0 0 16px rgba(255, 158, 83, .5);
+    }
+
+    button.secondary {
+      background: #1c565d;
+      border-color: #397d7b;
+    }
+
+    button.outline {
+      background: transparent;
+    }
+
+    button.saved {
+      background: #7250aa;
+      border-color: #7250aa;
+    }
+
+    button.danger {
+      background: #552d43;
+      border-color: #552d43;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 17px;
+      flex-wrap: wrap;
+    }
+
+    .tabs button {
+      background: #1a2a43;
+      border: 1px solid #38506d;
+    }
+
+    .tabs button.active {
+      background: #287d7b;
+      border-color: #69b4a6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+      gap: 13px;
+    }
+
+    .job {
+      background: #0a2935;
+      border: 1px solid #326c6c;
+      border-radius: 14px;
+      padding: 17px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .job h3 {
+      margin: 0;
+      font-size: 1.06rem;
+    }
+
+    .company {
+      color: #bad3f9;
+      font-weight: 650;
+    }
+
+    .tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: .73rem;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: #20565a;
+      color: #dcf8ee;
+    }
+
+    .tag.warn {
+      background: #55412d;
+      color: #ffe0b1;
+    }
+
+    .tag.ok {
+      background: #20483e;
+      color: #b8f4da;
+    }
+
+    .job p {
+      margin: 0;
+      font-size: .87rem;
+      color: #b4c5de;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .actions button,
+    .actions select {
+      font-size: .83rem;
+      padding: 8px;
+    }
+
+    .actions a {
+      color: #a8c9ff;
+      font-weight: 700;
+      font-size: .87rem;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .note {
+      font-size: .85rem;
+      color: #b3c5df;
+    }
+
+    .formgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+    }
+
+    .formgrid > * {
+      width: 100%;
+    }
+
+    a {
+      color: #f5d590;
+    }
+
+    .empty {
+      border: 1px dashed #425d7d;
+      padding: 24px;
+      border-radius: 12px;
+      color: #b4c7e3;
+    }
+
+    .mini {
+      font-size: .8rem;
+      color: #92b1d8;
+    }
+
+    .toast {
+      color: #c6f6d9;
+    }
+
+    footer {
+      text-align: center;
+      color: #91a8c7;
+      padding: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .stat {
+        padding: 12px;
+      }
+
+      .stat strong {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="eyebrow">PERSONAL JOB RADAR · REMOTE IT</div>
+    <h1>🌙 NightShift IT</h1>
+    <p class="sub">Find the night shift. Save the good ones. Build your IT career.</p>
+  </header>
+
+  <main>
+    <div class="stats">
+      <div class="stat">
+        <strong id="newCount">—</strong>
+        <span>Daily matches</span>
+      </div>
+
+      <div class="stat">
+        <strong id="savedCount">0</strong>
+        <span>Saved jobs</span>
+      </div>
+
+      <div class="stat">
+        <strong id="appliedCount">0</strong>
+        <span>Applied</span>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="row">
+        <div>
+          <h2>Daily discovery feed</h2>
+          <div id="freshness" class="note">
+            Checking for your latest job feed…
+          </div>
+        </div>
+
+        <button id="refresh">↻ Check feed</button>
+      </div>
+
+      <p class="note">
+        New jobs are collected daily after deployment. A keyword match is
+        <strong>not</strong> proof of an overnight shift. Confirm shift,
+        U.S. remote eligibility, and employer legitimacy before applying.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="tabs">
+        <button class="active" data-tab="discover">🔎 Discover</button>
+        <button data-tab="saved">♡ Saved jobs</button>
+        <button data-tab="applications">✓ Applications</button>
+      </div>
+
+      <div class="toolbar">
+        <input
+          id="search"
+          placeholder="Search title, employer, keyword…"
+          aria-label="Search jobs"
+        >
+
+        <select id="filter">
+          <option value="all">All shift types</option>
+          <option value="overnight">Overnight / night</option>
+          <option value="evening">Evening</option>
+          <option value="weekend">Weekend</option>
+        </select>
+
+        <select id="sort">
+          <option value="new">Newest first</option>
+          <option value="company">Company A–Z</option>
+        </select>
+
+        <button class="secondary" id="export">Export saved CSV</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="row">
+        <h2 id="boardTitle">Discover jobs</h2>
+        <span id="resultCount" class="mini"></span>
+      </div>
+
+      <div class="grid" id="cards"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Save a job you found elsewhere</h2>
+
+      <form id="add">
+        <div class="formgrid">
+          <input name="company" placeholder="Company name" required>
+          <input name="title" placeholder="Position title" required>
+          <input name="url" type="url" placeholder="Application URL" required>
+
+          <select name="shift">
+            <option value="unverified">Shift unverified</option>
+            <option value="overnight">Overnight</option>
+            <option value="evening">Evening</option>
+            <option value="weekend">Weekend</option>
+          </select>
+
+          <input name="hours" placeholder="Hours / time zone">
+          <input name="notes" placeholder="Notes (certs, clearance, clinical schedule)">
+        </div>
+
+        <p>
+          <button type="submit">+ Save to my jobs</button>
+        </p>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Quick employer searches</h2>
+
+      <p class="note">
+        Search for additional listings directly on career platforms; confirm
+        the actual company careers page before applying.
+      </p>
+
+      <div class="toolbar">
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://www.google.com/search?q=site%3Aicims.com+remote+%22overnight%22+%22service+desk%22"
+        >
+          Federal service desk ↗
+        </a>
+
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://www.google.com/search?q=site%3Agreenhouse.io+%22remote%22+%22night+shift%22+%22support%22"
+        >
+          Night technical support ↗
+        </a>
+
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://www.google.com/search?q=%22remote%22+%22overnight%22+%22NOC+analyst%22+careers"
+        >
+          Overnight NOC ↗
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      Private bookmarks live in this browser only. Export your CSV to back them up.
+    </footer>
+  </main>
+
+  <script>
+    const STORE = 'nightshift-it-tracker-v2';
+    const OLD = 'nightshift-it-jobs-v1';
+
+    const seed = {
+      id: 'manual:empower-ai',
+      company: 'Empower AI',
+      title: 'Tier I Service Desk Agent (Junior, Extended Hours)',
+      url: 'https://careers-empowerai.icims.com/jobs/9537/2026-9537/job',
+      shift: 'overnight',
+      hours: 'Extended hours window 8:01 PM–5:59 AM ET; assigned hours not confirmed',
+      notes: 'Official employer link. Active Secret clearance and IAT Level I certification required. Verify opening, shift and U.S. remote eligibility.',
+      source: 'Employer link',
+      status: 'Saved',
+      posted: '',
+      location: 'Remote eligibility unverified',
+      evidence: 'Extended-hours shift listed in job description'
+    };
+
+    let saved = {};
+
+    try {
+      saved = JSON.parse(localStorage.getItem(STORE) || '{}');
+    } catch {}
+
+    if (!Object.keys(saved).length) {
+      try {
+        let old = JSON.parse(localStorage.getItem(OLD) || '[]');
+        old.forEach(j => {
+          saved['manual:' + j.id] = {
+            ...j,
+            id: 'manual:' + j.id
+          };
+        });
+      } catch {}
+
+      if (!Object.keys(saved).length) {
+        saved[seed.id] = seed;
+      }
+
+      persist();
+    }
+
+    let feed = [];
+    let tab = 'discover';
+    let feedDate = null;
+
+    const $ = id => document.getElementById(id);
+
+    function persist() {
+      localStorage.setItem(STORE, JSON.stringify(saved));
+    }
+
+    function esc(v) {
+      return String(v ?? '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[c]));
+    }
+
+    function validUrl(url) {
+      try {
+        let u = new URL(url);
+        return ['https:', 'http:'].includes(u.protocol) ? u.href : '#';
+      } catch {
+        return '#';
+      }
+    }
+
+    function tags(j) {
+      let s = (j.shift || 'unverified').toLowerCase();
+
+      return `
+        <span class="tag ${s === 'unverified' ? 'warn' : ''}">
+          ${esc(j.shift || 'Unverified shift')}
+        </span>
+        <span class="tag warn">
+          ${esc(j.location || 'Location unverified')}
+        </span>
+      `;
+    }
+
+    function render() {
+      let list = tab === 'discover'
+        ? feed
+        : Object.values(saved).filter(
+            j => tab === 'saved' || j.status !== 'Saved'
+          );
+
+      let q = $('search').value.toLowerCase().trim();
+      let f = $('filter').value;
+
+      list = list.filter(j =>
+        (
+          !q ||
+          [j.title, j.company, j.notes, j.evidence, j.location]
+            .join(' ')
+            .toLowerCase()
+            .includes(q)
+        ) &&
+        (
+          f === 'all' ||
+          [j.shift, j.evidence, j.notes, j.hours]
+            .join(' ')
+            .toLowerCase()
+            .includes(f)
+        )
+      );
+
+      if ($('sort').value === 'company') {
+        list.sort((a, b) => a.company.localeCompare(b.company));
+      } else {
+        list.sort((a, b) =>
+          String(b.posted || '').localeCompare(String(a.posted || ''))
+        );
+      }
+
+      $('newCount').textContent = feed.length;
+      $('savedCount').textContent = Object.keys(saved).length;
+      $('appliedCount').textContent =
+        Object.values(saved).filter(j => j.status !== 'Saved').length;
+
+      $('boardTitle').textContent =
+        tab === 'discover'
+          ? 'Discover jobs'
+          : tab === 'saved'
+            ? 'Saved jobs'
+            : 'Application tracker';
+
+      $('resultCount').textContent = list.length + ' results';
+
+      $('cards').innerHTML = list.map(j => {
+        let isSaved = !!saved[j.id];
+        let own = saved[j.id] || j;
+
+        return `
+          <article class="job">
+            <div>
+              <h3>${esc(j.title)}</h3>
+              <div class="company">${esc(j.company)}</div>
+            </div>
+
+            <div class="tags">${tags(j)}</div>
+
+            <p>
+              ${esc(j.evidence
+                ? 'Match clues: ' + j.evidence
+                : j.hours || 'Exact shift hours unverified')}
+            </p>
+
+            <p>
+              ${esc(j.notes || 'Confirm schedule and remote eligibility with employer.')}
+            </p>
+
+            <div class="mini">
+              ${esc(j.source || 'Manually saved')}
+              ${j.posted ? ' · ' + esc(j.posted.slice(0, 10)) : ''}
+            </div>
+
+            <div class="actions">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="${esc(validUrl(j.url))}"
+              >
+                View listing ↗
+              </a>
+
+              <button
+                class="${isSaved ? 'saved' : 'secondary'}"
+                data-action="save"
+                data-id="${esc(j.id)}"
+              >
+                ${isSaved ? '♥ Saved' : '♡ Save'}
+              </button>
+
+              ${isSaved ? `
+                <select
+                  aria-label="Application status"
+                  data-action="status"
+                  data-id="${esc(j.id)}"
+                >
+                  ${['Saved', 'Applied', 'Interview', 'Offer', 'Rejected']
+                    .map(s => `
+                      <option ${own.status === s ? 'selected' : ''}>${s}</option>
+                    `)
+                    .join('')}
+                </select>
+
+                <button
+                  class="danger"
+                  data-action="remove"
+                  data-id="${esc(j.id)}"
+                >
+                  Remove
+                </button>
+              ` : ''}
+            </div>
+          </article>
+        `;
+      }).join('') || `
+        <div class="empty">
+          ${tab === 'discover'
+            ? 'No daily matches available yet. Publish the site and run the daily fetch workflow, or save jobs manually below.'
+            : 'Nothing here yet. Save a listing from Discover or add your own.'}
+        </div>
+      `;
+    }
+
+    $('cards').addEventListener('click', e => {
+      let button = e.target.closest('button[data-action]');
+      if (!button) return;
+
+      let id = button.dataset.id;
+
+      if (button.dataset.action === 'save') {
+        if (!saved[id]) {
+          let job = feed.find(x => x.id === id);
+          if (job) saved[id] = { ...job, status: 'Saved' };
+        } else if (tab === 'discover') {
+          delete saved[id];
+        }
+
+        persist();
+        render();
+      } else if (button.dataset.action === 'remove') {
+        if (confirm('Remove this saved job?')) {
+          delete saved[id];
+          persist();
+          render();
+        }
+      }
+    });
+
+    $('cards').addEventListener('change', e => {
+      let status = e.target.closest('select[data-action="status"]');
+
+      if (status && saved[status.dataset.id]) {
+        saved[status.dataset.id].status = status.value;
+        persist();
+        render();
+      }
+    });
+
+    document.querySelectorAll('[data-tab]').forEach(button => {
+      button.onclick = () => {
+        tab = button.dataset.tab;
+
+        document.querySelectorAll('[data-tab]').forEach(item => {
+          item.classList.toggle('active', item === button);
+        });
+
+        render();
+      };
+    });
+
+    ['search', 'filter', 'sort'].forEach(id => {
+      $(id).addEventListener('input', render);
+    });
+
+    $('add').onsubmit = e => {
+      e.preventDefault();
+
+      let data = Object.fromEntries(new FormData(e.target));
+      let id = 'manual:' + Date.now();
+
+      saved[id] = {
+        ...data,
+        id,
+        status: 'Saved',
+        source: 'Manually saved',
+        location: 'Remote eligibility unverified',
+        evidence: '',
+        posted: new Date().toISOString()
+      };
+
+      persist();
+      e.target.reset();
+      tab = 'saved';
+
+      document.querySelectorAll('[data-tab]').forEach(item => {
+        item.classList.toggle('active', item.dataset.tab === tab);
+      });
+
+      render();
+    };
+
+    $('export').onclick = () => {
+      let columns = [
+        'company',
+        'title',
+        'url',
+        'shift',
+        'hours',
+        'location',
+        'notes',
+        'status',
+        'source',
+        'posted'
+      ];
+
+      let rows = [
+        columns.join(','),
+        ...Object.values(saved).map(job =>
+          columns.map(key =>
+            '"' + String(job[key] || '').replace(/"/g, '""') + '"'
+          ).join(',')
+        )
+      ];
+
+      let link = document.createElement('a');
+      let url = URL.createObjectURL(
+        new Blob([rows.join('\r\n')], { type: 'text/csv' })
+      );
+
+      link.href = url;
+      link.download = 'nightshift-it-saved-jobs.csv';
+      link.click();
+
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+
+    async function refresh() {
+      let button = $('refresh');
+
+      button.disabled = true;
+      button.textContent = 'Checking…';
+
+      try {
+        let response = await fetch('./jobs.json?ts=' + Date.now(), {
+          cache: 'no-store'
+        });
+
+        if (!response.ok) throw Error('Feed unavailable');
+
+        let data = await response.json();
+
+        feed = Array.isArray(data.jobs) ? data.jobs : [];
+        feedDate = data.updated_at;
+
+        $('freshness').textContent = feedDate
+          ? 'Feed updated: ' +
+            new Date(feedDate).toLocaleString() +
+            ' · ' +
+            feed.length +
+            ' possible matches'
+          : 'Daily feed not yet activated. See README for GitHub Pages setup.';
+      } catch (error) {
+        $('freshness').textContent =
+          'Daily feed unavailable here. Host the website and enable the daily GitHub Action to load matches.';
+      } finally {
+        button.disabled = false;
+        button.textContent = '↻ Check feed';
+        render();
+      }
+    }
+
+    $('refresh').onclick = refresh;
+
+    render();
+    refresh();
+  </script>
+</body>
+</html>
