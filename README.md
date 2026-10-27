@@ -1,13 +1,65 @@
-# NightShift IT — private personal job dashboard
+# 🌙 The Night Desk
 
-A lightweight job-search dashboard for remote after-hours IT work, with browser-local bookmarks and application tracking.
+**Your after-hours tech job radar.**
 
-## Run it
+The Night Desk is a job discovery and tracking website designed to help
+people find remote technology opportunities, including potential evening,
+overnight, weekend, and flexible roles.
 
-Open `index.html` for the dashboard and manual tracking. For live daily results, publish the project with **GitHub Pages** (Settings → Pages → Deploy from a branch → main / root), then go to **Actions → Refresh job matches daily → Run workflow**. The scheduled workflow updates `jobs.json` every day around 13:17 UTC (GitHub scheduled jobs can be delayed). GitHub Pages serves the latest feed after the update. GitHub may disable scheduled workflows on inactive repositories.
+## ✨ Features
 
-The feed currently uses the publicly available Remotive and Arbeitnow endpoints. Their terms and availability may change. The fetcher intentionally shows *possible* after-hours IT matches rather than claiming every job is a confirmed overnight shift. Some results may point to aggregators, so always verify the employer and posting. It does not bypass paywalls, scrape LinkedIn/Indeed, or automatically apply.
+- **Daily job feed:** Collects potential matches from job feeds and selected
+  employer career boards.
+- **Search and filters:** Search by job title, company, or keyword and filter
+  by shift type.
+- **Saved jobs:** Bookmark listings you want to revisit.
+- **Application tracker:** Track jobs as saved, applied, interview, offer,
+  or rejected.
+- **CSV export:** Download your saved jobs and application statuses.
+- **Manual entry:** Add a job you found somewhere else.
+- **Quick searches:** Explore additional opportunities through career searches.
 
-**Privacy:** Saved jobs and statuses are stored in your current browser's localStorage, not synced across devices. Export CSV periodically to back up your tracker. GitHub Pages hosting makes the site URL public even though saved data stays in the browser. Do not put sensitive notes into the repository.
+## 🌐 Visit the Website
 
-To use locally with the feed, serve the directory with `python -m http.server 8000` and visit `http://localhost:8000`. The feed only refreshes when the script runs or the GitHub workflow executes.
+[Open The Night Desk](https://anroblez.github.io/nightshift-it/)
+
+## 🛠️ Built With
+
+- HTML, CSS, and JavaScript
+- Python
+- GitHub Actions
+- GitHub Pages
+
+## 🔄 How the Job Feed Works
+
+A GitHub Actions workflow runs the Python script in `scripts/fetch_jobs.py`
+to collect potential matches. The script searches selected sources and
+employer boards listed in `scripts/approved_employers.json`, then writes
+the results to `jobs.json`.
+
+The website reads `jobs.json` and displays the results in the discovery feed.
+The workflow is scheduled to run daily and can also be started manually.
+
+## 💾 Saving Jobs
+
+Saved jobs are stored in your browser on your device. They aren't shared with
+other visitors, and they don't automatically transfer to another browser or
+device. Use **Export saved CSV** to back them up.
+
+## 🔎 Before You Apply
+
+Listings are **potential matches**, not guaranteed overnight positions.
+Before applying, check:
+
+- The actual work schedule and time zone.
+- Whether the position is remote in your state.
+- The employer and application link.
+- Any experience, certification, or clearance requirements.
+- Whether the position is still open.
+
+## 🌙 About the Project
+
+I created The Night Desk to practice building a website, using GitHub Actions,
+and working with Python and data feeds while exploring opportunities in tech.
+
+Inspired by cozy late nights, starry skies, and a little bit of magic. ✨
