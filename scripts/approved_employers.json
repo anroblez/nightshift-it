@@ -1,7 +1,18 @@
 {
-  "greenhouse": {},
+  "greenhouse": {
+    "perfectserve": "PerfectServe",
+    "fixify": "Fixify",
+    "wisetack": "Wisetack",
+    "6sense": "6sense",
+    "sureify": "Sureify",
+    "kalepa": "Kalepa",
+    "prismatic": "Prismatic"
+  },
   "lever": {
     "SoundStack": "SoundStack",
-    "PacerPro": "PacerPro"
+    "PacerPro": "PacerPro",
+    "lucidworks": "Lucidworks",
+    "easypost-2": "EasyPost",
+    "firemon": "FireMon"
   }
 }
