@@ -14,9 +14,30 @@ CONFIG = ROOT / 'scripts' / 'approved_employers.json'
 OUTPUT = ROOT / 'jobs.json'
 NOW = datetime.datetime.now(datetime.timezone.utc)
 
-ROLE = re.compile(r'help[ -]?desk|service[ -]?desk|technical support|it support|desktop support|application support|support analyst|support engineer|noc|network operations|soc analyst|security operations|security analyst|cybersecurity|cloud support|cloud engineer|systems? admin|network admin|it specialist|incident (?:response|manager|coordinator)|infrastructure support|site security officer|security operations coordinator|personnel security|security clearance coordinator|clearance coordinator|background (?:screening|investigator|investigation|check)|record searcher|trust (?:and|&) safety|fraud (?:analyst|investigator|specialist)|risk analyst|identity (?:and|&) access|access control analyst|compliance analyst|grc analyst|technical operations coordinator|osint analyst', re.I)
-EXCLUDE_ROLE = re.compile(r'\b(senior|sr\.?|principal|staff|director|vice president|head of|architect|sales|account executive|recruiter|physician|nurse)\b', re.I)
-REMOTE = re.compile(r'\bremote\b|work from home|work-from-home|telecommut', re.I)
+ROLE = re.compile(
+    r'help[ -]?desk|service[ -]?desk|'
+    r'technical support|it support|desktop support|'
+    r'application support|support analyst|support engineer|'
+    r'support specialist|support technician|'
+    r'noc|network operations|'
+    r'soc analyst|security operations|security analyst|cybersecurity|'
+    r'cloud support|cloud engineer|'
+    r'systems? admin|systems? engineer|network admin|'
+    r'it specialist|it technician|'
+    r'incident (?:response|manager|coordinator)|'
+    r'infrastructure support|'
+    r'site security officer|security operations coordinator|'
+    r'personnel security|security clearance coordinator|'
+    r'clearance coordinator|background (?:screening|investigator|investigation|check)|'
+    r'record searcher|trust (?:and|&) safety|'
+    r'fraud (?:analyst|investigator|specialist)|risk analyst|'
+    r'identity (?:and|&) access|access control analyst|'
+    r'compliance analyst|grc analyst|'
+    r'technical operations coordinator|osint analyst',
+    re.I
+)
+
+REMOTE = re.compile(r'\bremote\b|work from home|work-from-home|telecommut|telework|hybrid', re.I)
 NOT_REMOTE = re.compile(r'\b(on[ -]?site only|in[ -]?office only|hybrid only|not remote|no remote)\b', re.I)
 EXCLUDED_LOCATION = re.compile(r'\b(europe only|emea only|uk only|canada only|india only|australia only|latam only|apac only)\b', re.I)
 US_LOCATION = re.compile(r'\b(united states|usa|u\.s\.|us only|north america|worldwide|global|anywhere|remote)\b', re.I)
