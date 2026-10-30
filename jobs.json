@@ -1,6 +1,21 @@
 {
-  "updated_at": "2026-10-29T18:58:33.335597+00:00",
+  "updated_at": "2026-10-30T18:16:12.614717+00:00",
   "jobs": [
+    {
+      "id": "Greenhouse:https://boards.greenhouse.io/6sense/jobs/8273670?gh_jid=8273670",
+      "company": "6sense",
+      "title": "IT Support Specialist",
+      "url": "https://boards.greenhouse.io/6sense/jobs/8273670?gh_jid=8273670",
+      "location": "United States, Remote",
+      "posted": "2026-10-30T13:34:58-04:00",
+      "source": "Employer-direct · Greenhouse",
+      "shift": "Schedule unconfirmed",
+      "hours": "",
+      "evidence": "Schedule unconfirmed",
+      "clearance": "Not mentioned",
+      "notes": "Employer career-board listing. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
+      "status": "Saved"
+    },
     {
       "id": "Greenhouse:https://job-boards.greenhouse.io/fixify/jobs/5453534008",
       "company": "Fixify",
@@ -32,21 +47,6 @@
       "status": "Saved"
     },
     {
-      "id": "Greenhouse:https://boards.greenhouse.io/6sense/jobs/8273670?gh_jid=8273670",
-      "company": "6sense",
-      "title": "IT Support Specialist",
-      "url": "https://boards.greenhouse.io/6sense/jobs/8273670?gh_jid=8273670",
-      "location": "United States, Remote",
-      "posted": "2026-10-12T18:33:25-04:00",
-      "source": "Employer-direct · Greenhouse",
-      "shift": "Schedule unconfirmed",
-      "hours": "",
-      "evidence": "Schedule unconfirmed",
-      "clearance": "Not mentioned",
-      "notes": "Employer career-board listing. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
-      "status": "Saved"
-    },
-    {
       "id": "Greenhouse:https://job-boards.greenhouse.io/wisetack/jobs/4727999005",
       "company": "Wisetack",
       "title": "IT Support Engineer",
@@ -57,21 +57,6 @@
       "shift": "Schedule unconfirmed",
       "hours": "",
       "evidence": "Schedule unconfirmed",
-      "clearance": "Not mentioned",
-      "notes": "Employer career-board listing. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
-      "status": "Saved"
-    },
-    {
-      "id": "Greenhouse:https://job-boards.greenhouse.io/sureify/jobs/5231980008",
-      "company": "Sureify",
-      "title": "Technical Support Analyst",
-      "url": "https://job-boards.greenhouse.io/sureify/jobs/5231980008",
-      "location": "US - Remote",
-      "posted": "2026-10-02T15:23:49-04:00",
-      "source": "Employer-direct · Greenhouse",
-      "shift": "overnight, evening, weekend",
-      "hours": "",
-      "evidence": "overnight, evening, weekend",
       "clearance": "Not mentioned",
       "notes": "Employer career-board listing. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
       "status": "Saved"
