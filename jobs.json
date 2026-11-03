@@ -1,21 +1,6 @@
 {
-  "updated_at": "2026-11-02T22:20:17.501993+00:00",
+  "updated_at": "2026-11-03T20:07:25.482778+00:00",
   "jobs": [
-    {
-      "id": "Greenhouse:https://job-boards.greenhouse.io/fixify/jobs/5453534008",
-      "company": "Fixify",
-      "title": "IT Operations Analyst",
-      "url": "https://job-boards.greenhouse.io/fixify/jobs/5453534008",
-      "location": "Remote",
-      "posted": "2026-10-30T19:06:34-04:00",
-      "source": "Employer-direct · Greenhouse",
-      "shift": "weekend",
-      "hours": "",
-      "evidence": "weekend",
-      "clearance": "Not mentioned",
-      "notes": "Employer career-board listing. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
-      "status": "Saved"
-    },
     {
       "id": "Greenhouse:https://boards.greenhouse.io/6sense/jobs/8273670?gh_jid=8273670",
       "company": "6sense",
@@ -59,21 +44,6 @@
       "evidence": "Schedule unconfirmed",
       "clearance": "Not mentioned",
       "notes": "Employer career-board listing. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
-      "status": "Saved"
-    },
-    {
-      "id": "Arbeitnow:https://www.arbeitnow.com/jobs/companies/bg-prevent/it-support-manager-bonn-178882",
-      "company": "Bg Prevent",
-      "title": "IT Support Manager",
-      "url": "https://www.arbeitnow.com/jobs/companies/bg-prevent/it-support-manager-bonn-178882",
-      "location": "Bonn",
-      "posted": "1793646037",
-      "source": "Trusted feed · Arbeitnow",
-      "shift": "Schedule unconfirmed",
-      "hours": "Permanent employment manager",
-      "evidence": "Schedule unconfirmed",
-      "clearance": "Not mentioned",
-      "notes": "Third-party feed; confirm on employer career page. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
       "status": "Saved"
     },
     {
