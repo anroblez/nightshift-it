@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-09T22:59:49.267005+00:00",
+  "updated_at": "2026-11-10T20:28:32.766385+00:00",
   "jobs": [
     {
       "id": "Greenhouse:https://boards.greenhouse.io/6sense/jobs/8273670?gh_jid=8273670",
@@ -44,36 +44,6 @@
       "evidence": "Schedule unconfirmed",
       "clearance": "Not mentioned",
       "notes": "Employer career-board listing. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
-      "status": "Saved"
-    },
-    {
-      "id": "Arbeitnow:https://www.arbeitnow.com/jobs/companies/exa/remote-support-engineer-paygo-317778",
-      "company": "Exa",
-      "title": "Support Engineer, PAYGO",
-      "url": "https://www.arbeitnow.com/jobs/companies/exa/remote-support-engineer-paygo-317778",
-      "location": "Remote",
-      "posted": "1794195630",
-      "source": "Trusted feed · Arbeitnow",
-      "shift": "Schedule unconfirmed",
-      "hours": "Full Time",
-      "evidence": "Schedule unconfirmed",
-      "clearance": "Not mentioned",
-      "notes": "Third-party feed; confirm on employer career page. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
-      "status": "Saved"
-    },
-    {
-      "id": "Arbeitnow:https://www.arbeitnow.com/jobs/companies/virtual7-gmbh/remote-kubernetes-administrator-private-cloud-engineer-karlsruhe-424126",
-      "company": "virtual7 GmbH",
-      "title": "Kubernetes Administrator/Private Cloud Engineer (m/w/d)",
-      "url": "https://www.arbeitnow.com/jobs/companies/virtual7-gmbh/remote-kubernetes-administrator-private-cloud-engineer-karlsruhe-424126",
-      "location": "Homeoffice",
-      "posted": "1794162686",
-      "source": "Trusted feed · Arbeitnow",
-      "shift": "Schedule unconfirmed",
-      "hours": "Experienced fulltime permanent",
-      "evidence": "Schedule unconfirmed",
-      "clearance": "Not mentioned",
-      "notes": "Third-party feed; confirm on employer career page. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
       "status": "Saved"
     },
     {
