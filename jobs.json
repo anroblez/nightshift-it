@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21T20:07:03.066745+00:00",
+  "updated_at": "2026-11-22T20:22:18.929424+00:00",
   "jobs": [
     {
       "id": "Greenhouse:https://job-boards.greenhouse.io/kalepa/jobs/5992992004",
@@ -14,6 +14,21 @@
       "evidence": "Schedule unconfirmed",
       "clearance": "Not mentioned",
       "notes": "Employer career-board listing. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
+      "status": "Saved"
+    },
+    {
+      "id": "Arbeitnow:https://www.arbeitnow.com/jobs/companies/virtual7-gmbh/remote-kubernetes-administrator-private-cloud-engineer-karlsruhe-311574",
+      "company": "virtual7 GmbH",
+      "title": "Kubernetes Administrator/Private Cloud Engineer (m/w/d)",
+      "url": "https://www.arbeitnow.com/jobs/companies/virtual7-gmbh/remote-kubernetes-administrator-private-cloud-engineer-karlsruhe-311574",
+      "location": "Homeoffice",
+      "posted": "1795361478",
+      "source": "Trusted feed · Arbeitnow",
+      "shift": "Schedule unconfirmed",
+      "hours": "Experienced fulltime permanent",
+      "evidence": "Schedule unconfirmed",
+      "clearance": "Not mentioned",
+      "notes": "Third-party feed; confirm on employer career page. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
       "status": "Saved"
     },
     {
