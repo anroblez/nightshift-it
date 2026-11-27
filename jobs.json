@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26T22:22:03.648694+00:00",
+  "updated_at": "2026-11-27T21:58:35.889090+00:00",
   "jobs": [
     {
       "id": "Greenhouse:https://job-boards.greenhouse.io/kalepa/jobs/5992992004",
@@ -7,13 +7,28 @@
       "title": "Technical Support Engineer",
       "url": "https://job-boards.greenhouse.io/kalepa/jobs/5992992004",
       "location": "USA (Remote)",
-      "posted": "2026-10-13T18:55:52-04:00",
+      "posted": "2026-11-27T10:28:00-05:00",
       "source": "Employer-direct · Greenhouse",
       "shift": "Schedule unconfirmed",
       "hours": "",
       "evidence": "Schedule unconfirmed",
       "clearance": "Not mentioned",
       "notes": "Employer career-board listing. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
+      "status": "Saved"
+    },
+    {
+      "id": "Arbeitnow:https://www.arbeitnow.com/jobs/companies/virtual7-gmbh/remote-kubernetes-administrator-private-cloud-engineer-karlsruhe-315861",
+      "company": "virtual7 GmbH",
+      "title": "Kubernetes Administrator/Private Cloud Engineer (m/w/d)",
+      "url": "https://www.arbeitnow.com/jobs/companies/virtual7-gmbh/remote-kubernetes-administrator-private-cloud-engineer-karlsruhe-315861",
+      "location": "Homeoffice",
+      "posted": "1795739496",
+      "source": "Trusted feed · Arbeitnow",
+      "shift": "Schedule unconfirmed",
+      "hours": "Experienced fulltime permanent",
+      "evidence": "Schedule unconfirmed",
+      "clearance": "Not mentioned",
+      "notes": "Third-party feed; confirm on employer career page. Verify schedule, U.S. state eligibility, employer legitimacy, and whether the opening is still active.",
       "status": "Saved"
     },
     {
